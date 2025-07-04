@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Sobre Nós - Em Prata</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    body {
+      background-color: #f8f9fa;
+      font-family: "Segoe UI", sans-serif;
+      padding-top: 56px;
+    }
+
+    .banner {
+      background: linear-gradient(rgba(39, 39, 39, 0.6), rgba(53, 53, 53, 0.6)),
+                  url("/media/bg_silver_jewlery.png") no-repeat center center;
+      background-size: cover;
+      color: #ddd;
+      padding: 60px 0;
+      text-align: center;
+    }
+
+    .banner h1 {
+      font-weight: 600;
+      font-size: 3rem;
+    }
+
+    .content {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .content h2 {
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #444;
+    }
+
+    .content p {
+      font-size: 1.1rem;
+      color: #555;
+      line-height: 1.7;
+    }
+
+.btn,
+.btn-outline-primary,
+.btn-outline-secondary {
+  border-radius: 2px;
+  border-width: 2px;
+  font-weight: 600;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">Em Prata</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link {% if request.path == '/' %}active{% endif %}" href="{% url 'catalogo' %}">Catálogo</a></li>
+            <li class="nav-item"><a class="nav-link {% if request.path == '/sobre/' %}active{% endif %}" href="{% url 'sobre' %}">Sobre Nós</a></li>
+            <li class="nav-item"><a class="nav-link {% if request.path == '/contato/' %}active{% endif %}" href="{% url 'contato' %}">Contato</a></li>
+        </ul>
+      <a href="{% url 'carrinho' %}" class="btn btn-outline-light position-relative">
+        <i class="bi bi-cart"></i> Carrinho
+        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+          R$ {{ total_carrinho|default:"0.00" }}
+        </span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- Banner -->
+<div class="banner">
+  <h1>Sobre Nós</h1>
+  <p>Conheça a história por trás da elegância</p>
+</div>
+
+<!-- Conteúdo -->
+<div class="content">
+  <h2>Nossa Essência</h2>
+  <p>
+    Fundada em 2022, a <strong>Em Prata</strong> nasceu do desejo de eternizar momentos por meio de joias que celebram a beleza, a memória e a autenticidade. 
+    Inspirados na pureza da prata e no design minimalista, transformamos emoções em peças atemporais que acompanham histórias, conquistas e afetos.
+  </p>
+  <p>
+    Cada joia da Em Prata é resultado de um processo cuidadoso, desde a concepção do desenho até a finalização artesanal. Prezamos pela harmonia entre forma e significado, criando peças leves, versáteis e carregadas de simbolismo.
+  </p>
+
+  <h2>Missão</h2>
+  <p>
+    Oferecer joias em prata com design contemporâneo, qualidade excepcional e valor simbólico, proporcionando aos nossos clientes experiências memoráveis por meio de produtos que refletem elegância e autenticidade.
+  </p>
+
+  <h2>Visão</h2>
+  <p>
+    Ser reconhecida como uma marca referência no mercado de joias artesanais em prata, destacando-se pelo cuidado com os detalhes, o atendimento humanizado e a valorização das histórias individuais de cada cliente.
+  </p>
+
+  <h2>Valores</h2>
+  <ul>
+    <li><strong>Autenticidade:</strong> Criamos peças que refletem a singularidade de cada pessoa.</li>
+    <li><strong>Qualidade:</strong> Utilizamos apenas prata legítima e processos artesanais refinados.</li>
+    <li><strong>Respeito:</strong> Valorizamos relações éticas com clientes, fornecedores e colaboradores.</li>
+    <li><strong>Inspiração:</strong> Buscamos na natureza, na arte e nas emoções humanas a base do nosso design.</li>
+    <li><strong>Comprometimento:</strong> Estamos sempre atentos ao aperfeiçoamento e à satisfação de quem nos escolhe.</li>
+  </ul>
+
+  <h2>Compromisso com a Qualidade</h2>
+  <p>
+    Nossos materiais são selecionados com rigor. Toda peça é feita com <em>prata 925</em>, garantindo brilho duradouro, resistência e um acabamento impecável.
+    Trabalhamos com técnicas modernas e artesanais para entregar joias confortáveis, duráveis e esteticamente sofisticadas.
+  </p>
+
+  <p>
+    Seja para marcar uma ocasião especial ou para o uso cotidiano, cada joia da Em Prata carrega um significado e um cuidado únicos — criados para permanecer.
+  </p>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

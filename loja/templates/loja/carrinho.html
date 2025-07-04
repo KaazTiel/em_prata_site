@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <title>Carrinho - Em Prata</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <style>
+    :root {
+      --prata: #b0b0b0;
+      --cinza-escuro: #444444;
+      --cinza-claro: #e9ecef;
+      --cinza-medio: #6a6a6a;
+      --cinza-hover: #5a5a5a;
+      --verde-sucesso: #198754;
+    }
+    body {
+      background-color: #f8f9fa;
+      font-family: "Segoe UI", sans-serif;
+      min-height: 100vh;
+      padding-top: 56px;
+      padding-bottom: 3rem;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .container {
+      max-width: 700px;
+      background: white;
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgb(0 0 0 / 0.1);
+      margin-top: 2rem;
+    }
+    h1 {
+      color: var(--cinza-escuro);
+      font-weight: 600;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+    table {
+      border-collapse: separate;
+      border-spacing: 0 12px;
+      width: 100%;
+    }
+    thead th {
+      color: var(--cinza-escuro);
+      font-weight: 600;
+      border-bottom: 2px solid var(--prata);
+      padding-bottom: 0.5rem;
+      text-align: left;
+    }
+    tbody tr {
+      background: var(--cinza-claro);
+      border-radius: 8px;
+    }
+    tbody td {
+      padding: 0.75rem 1rem;
+      vertical-align: middle;
+      color: var(--cinza-escuro);
+      font-weight: 500;
+    }
+    tbody tr:hover {
+      background-color: var(--cinza-medio);
+      color: white;
+    }
+    .total {
+      font-weight: 700;
+      font-size: 1.25rem;
+      color: var(--cinza-escuro);
+      margin-top: 1.5rem;
+      text-align: right;
+    }
+    .btn-success {
+      background-color: var(--verde-sucesso);
+      border-color: var(--verde-sucesso);
+      font-weight: 600;
+      padding: 0.5rem 1.5rem;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-success:hover,
+    .btn-success:focus {
+      background-color: #145c32;
+      border-color: #145c32;
+      text-decoration: none;
+      color: white;
+    }
+    .btn-primary {
+      background-color: var(--cinza-escuro);
+      border-color: var(--cinza-escuro);
+      font-weight: 600;
+      padding: 0.5rem 1.5rem;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .btn-primary:hover,
+    .btn-primary:focus {
+      background-color: var(--cinza-hover);
+      border-color: var(--cinza-hover);
+      text-decoration: none;
+      color: white;
+    }
+    .btn-danger {
+      background-color: #dc3545;
+      border-color: #dc3545;
+      padding: 0.25rem 0.6rem;
+      border-radius: 8px;
+      font-weight: 600;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+    .btn-danger:hover,
+    .btn-danger:focus {
+      background-color: #a71d2a;
+      border-color: #a71d2a;
+      color: white;
+      text-decoration: none;
+    }
+    p {
+      color: var(--cinza-medio);
+      font-size: 1.1rem;
+      text-align: center;
+      margin: 3rem 0;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Seu Carrinho</h1>
+
+    {% if itens %}
+      <table>
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Subtotal</th>
+            <th></th> <!-- coluna para o botão excluir -->
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in itens %}
+          <tr>
+            <td>{{ item.produto.nome }}</td>
+            <td>{{ item.qtd }}</td>
+            <td>R$ {{ item.subtotal|floatformat:2 }}</td>
+            <td>
+              <form method="POST" action="{% url 'remover_do_carrinho' item.produto.id %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger" title="Remover item">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      <div class="total">Total: R$ {{ total|floatformat:2 }}</div>
+
+      <div class="d-flex justify-content-end mt-4 gap-2">
+        <a href="{% url 'catalogo' %}" class="btn btn-primary">
+          <i class="bi bi-arrow-left"></i> Voltar ao Catálogo
+        </a>
+        <a href="{% url 'finalizar' %}" class="btn btn-success">
+          <i class="bi bi-cart-check"></i> Finalizar Compra
+        </a>
+      </div>
+
+    {% else %}
+      <p>Seu carrinho está vazio.</p>
+      <div class="d-flex justify-content-center mt-3">
+        <a href="{% url 'catalogo' %}" class="btn btn-primary">
+          <i class="bi bi-arrow-left"></i> Voltar ao Catálogo
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
