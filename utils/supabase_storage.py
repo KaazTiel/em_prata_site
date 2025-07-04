@@ -1,7 +1,8 @@
 import requests
+from decouple import config
 
-SUPABASE_URL = 'https://sskzbcnauqrvimqoplre.supabase.co'
-SUPABASE_API_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNza3piY25hdXFydmltcW9wbHJlIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc1MTUwMDMxNywiZXhwIjoyMDY3MDc2MzE3fQ.U_VF9Xj9jEYXeTOyDiEMs4zoyzxpnkb-hABTRPmKbYM'  # coloque a real aqui
+SUPABASE_URL = config('SUPABASE_URL')
+SUPABASE_API_KEY = config('SUPABASE_API_KEY')
 BUCKET = 'media'
 
 def upload_file_to_supabase(filename, file_bytes):

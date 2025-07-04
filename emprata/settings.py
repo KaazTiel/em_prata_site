@@ -64,13 +64,13 @@ WSGI_APPLICATION = 'emprata.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',  # banco padrão
-        'USER': 'postgres.sskzbcnauqrvimqoplre',  # usuário do pooler
-        'PASSWORD': 'AJXsIyDA88NqofW5',  # sua senha
-        'HOST': 'aws-0-us-east-2.pooler.supabase.com',  # host do pooler
-        'PORT': '5432',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT'),
         'OPTIONS': {
-            'sslmode': 'require',  # conexão segura
+            'sslmode': 'require',
         },
     }
 }
